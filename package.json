@@ -1,0 +1,19 @@
+{
+  "name": "create-servicenow-change-request",
+  "version": "0.0.1",
+  "description": "Automate the creation of a change request in ServiceNow",
+  "keywords": [
+    "change",
+    "change-request",
+    "servicenow"
+  ],
+  "author": "William Belle <william.belle@gmail.com>",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/innovativeinnovation/create-servicenow-change-request.git",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {}
+}
