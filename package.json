@@ -13,16 +13,26 @@
   "engines": {
     "node": ">=8"
   },
-  "scripts": {
-    "test": "eslint ."
+  "bin": {
+    "create-servicenow-change-request": "src/bin/create-servicenow-change-request.js",
+    "csncr": "src/bin/csncr.js"
   },
-  "devDependencies": {},
-  "dependencies": {
+  "scripts": {
+    "test": "eslint . && mocha"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.6.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "js-yaml": "^3.13.1",
+    "node-alias": "^1.0.4",
+    "yargs": "^14.2.0"
   }
 }
