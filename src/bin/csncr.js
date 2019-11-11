@@ -19,6 +19,24 @@ const yargs = require('yargs')
     demand: true
   })
 
+  // Application config
+  .option('a', {
+    alias: 'app-config',
+    describe: 'Application configuration file',
+    requiresArg: true,
+    type: 'string',
+    demand: true
+  })
+
+  // Changelog file
+  .option('l', {
+    alias: 'changelog',
+    describe: 'CHANGELOG file',
+    requiresArg: true,
+    type: 'string',
+    demand: true
+  })
+
   // Version
   .alias('v', 'version')
 
@@ -27,10 +45,26 @@ const yargs = require('yargs')
   .alias('h', 'help');
 
 const argv = yargs.argv;
+let userConfig;
+let appConfig;
+let changelogInfo;
 
-if (argv.u) {
+if (argv.u && argv.a && argv.l) {
   try {
-    console.log(utils.getConfig(argv.u));
+    userConfig = utils.getConfig(argv.u);
+    console.log(userConfig);
+  } catch (e) {
+    console.log(e.message);
+  }
+  try {
+    appConfig = utils.getConfig(argv.a);
+    console.log(appConfig);
+  } catch (e) {
+    console.log(e.message);
+  }
+  try {
+    changelogInfo = utils.getChangelogInfo(argv.l);
+    console.log(changelogInfo);
   } catch (e) {
     console.log(e.message);
   }
