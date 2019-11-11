@@ -22,20 +22,20 @@ describe('getChangelogInfo', function () {
       '- My changes made additional changes\n' +
       '- Completely unrelated to the above'
     );
-    infos[2].should.equal('Major');
+    infos[2].should.equal(1);
   });
 
   it('should get changelog informations (minor)', () => {
     const infos = utils.getChangelogInfo('test/resources/change-min.md');
     infos[0].should.equal('v0.1.1');
     infos[1].should.equal('- More changes');
-    infos[2].should.equal('Minor');
+    infos[2].should.equal(3);
   });
 
   it('should get changelog informations (significant)', () => {
     const infos = utils.getChangelogInfo('test/resources/change-sig.md');
     infos[0].should.equal('v0.3.0');
     infos[1].should.equal('- Good examples and basic guidelines');
-    infos[2].should.equal('Significant');
+    infos[2].should.equal(2);
   });
 });
