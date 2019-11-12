@@ -54,7 +54,7 @@ let userConfig;
 let appConfig;
 let changelogInfo;
 const startDate = moment().format('YYYY-MM-DD HH:mm:ss');
-const endDate = moment(startDate).add(1, 'seconds').format(
+const endDate = moment(startDate).add(5, 'minutes').format(
   'YYYY-MM-DD HH:mm:ss'
 );
 
@@ -80,14 +80,7 @@ if (argv.u && argv.a && argv.l) {
   process.exit(0);
 }
 
-async function createChangeRequest (
-  userConfig, appConfig, startDate, endDate, changelogInfo
-) {
-  const browser = await puppeteer.launch({
-    headless: false
-  });
-  const page = await browser.newPage();
-
+async function connectToTequila (page, userConfig) {
   await page.goto('https://tequila.epfl.ch/cgi-bin/tequila/loginform');
 
   await page.waitForSelector('#username');
@@ -100,7 +93,11 @@ async function createChangeRequest (
   );
 
   await page.click('#loginbutton');
+};
 
+async function createChange (
+  page, userConfig, appConfig, startDate, endDate, changelogInfo
+) {
   await page.goto(userConfig.host + '/change_request.do?' +
     'sys_id=-1&sysparm_stack=change_request_list.do&' +
     'sysparm_query=type=Standard^EQ&active=true');
@@ -174,17 +171,12 @@ async function createChangeRequest (
     changeNum
   );
   await page.click('#sysverb_insert');
-  await page.waitFor(2000);
-  const linkHandlers = await page.$x(
-    '//a[contains(text(), \'' + changeNum + '\')]'
-  );
-  if (linkHandlers.length > 0) {
-    await linkHandlers[0].click();
-  } else {
-    throw new Error('Link not found');
-  }
+  return changeNum;
+};
 
-  await page.waitFor(3000);
+async function closeTask (
+  page, userConfig, appConfig, startDate, endDate, changelogInfo
+) {
   const idSelectorTask = 'change_request.change_task.change_request_table';
   const tasks = await page.$x(
     '(//table[@id="' + idSelectorTask + '"]/tbody/tr/td)[3]/a'
@@ -210,5 +202,35 @@ async function createChangeRequest (
     endDate
   );
   await page.click('#close_complete');
+};
+
+async function createChangeRequest (
+  userConfig, appConfig, startDate, endDate, changelogInfo
+) {
+  const browser = await puppeteer.launch({
+    headless: false
+  });
+  const page = await browser.newPage();
+
+  await connectToTequila(page, userConfig);
+  const changeNum = await createChange(
+    page, userConfig, appConfig, startDate, endDate, changelogInfo
+  );
+
+  await page.waitFor(2000);
+  const linkHandlers = await page.$x(
+    '//a[contains(text(), \'' + changeNum + '\')]'
+  );
+  if (linkHandlers.length > 0) {
+    await linkHandlers[0].click();
+  } else {
+    throw new Error('Link not found');
+  }
+
+  await page.waitFor(3000);
+  await closeTask(
+    page, userConfig, appConfig, startDate, endDate, changelogInfo
+  );
+
   browser.close();
 };
