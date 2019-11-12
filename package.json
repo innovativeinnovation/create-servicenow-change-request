@@ -34,7 +34,9 @@
     "nyc": "^14.1.1"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "js-yaml": "^3.13.1",
+    "log-symbols": "^3.0.0",
     "moment": "^2.24.0",
     "node-alias": "^1.0.4",
     "puppeteer": "^2.0.0",

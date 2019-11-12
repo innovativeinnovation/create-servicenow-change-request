@@ -9,6 +9,9 @@
 
 const puppeteer = require('puppeteer');
 const moment = require('moment');
+const logSymbols = require('log-symbols');
+const colors = require('colors');
+
 const utils = require('../lib/index.js');
 const yargs = require('yargs')
 
@@ -162,7 +165,14 @@ async function createChangeRequest (
   const changeNum = await page.evaluate(() => {
     return document.getElementById('change_request.number').value;
   });
-  console.log(changeNum);
+  console.log(
+    logSymbols.success,
+    colors.green('Change Request created')
+  );
+  console.log(userConfig.host +
+    '/nav_to.do?uri=change_request.do?sysparm_query=number=' +
+    changeNum
+  );
   await page.click('#sysverb_insert');
   await page.waitFor(2000);
   const linkHandlers = await page.$x(
