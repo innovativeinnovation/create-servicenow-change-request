@@ -11,6 +11,7 @@ const puppeteer = require('puppeteer');
 const moment = require('moment');
 const logSymbols = require('log-symbols');
 const colors = require('colors');
+const Cryptr = require('cryptr');
 
 const utils = require('../lib/index.js');
 const yargs = require('yargs')
@@ -74,6 +75,10 @@ if (argv.u && argv.a && argv.l) {
   } catch (e) {
     console.log(e.message);
   }
+
+  const cptr = new Cryptr(userConfig.key);
+  userConfig.password = cptr.decrypt(userConfig.token);
+
   createChangeRequest(userConfig, appConfig, startDate, endDate, changelogInfo);
 } else {
   yargs.showHelp();
