@@ -127,7 +127,7 @@ async function createChange (
 
       document.getElementById(
         'sys_display.change_request.assignment_group'
-      ).value = appConfig.group;
+      ).value = appConfig.group_name;
       document.getElementById(
         'change_request.assignment_group'
       ).value = appConfig.group_id;
@@ -168,12 +168,14 @@ async function createChange (
     return document.getElementById('change_request.number').value;
   });
   console.log(
+    '\n',
     logSymbols.success,
     colors.green('Change Request created')
   );
-  console.log(userConfig.host +
-    '/nav_to.do?uri=change_request.do?sysparm_query=number=' +
-    changeNum
+  console.log(
+    userConfig.host +
+    '/nav_to.do?uri=change_request.do?sysparm_query=number=' + changeNum,
+    '\n'
   );
   await page.click('#sysverb_insert');
   return changeNum;
