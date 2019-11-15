@@ -218,7 +218,7 @@ async function createChangeRequest (
   userConfig, appConfig, startDate, endDate, changelogInfo
 ) {
   const browser = await puppeteer.launch({
-    headless: false
+    headless: true
   });
   const page = await browser.newPage();
 
