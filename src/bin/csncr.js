@@ -37,7 +37,7 @@ const yargs = require('yargs')
   // Changelog file
   .option('l', {
     alias: 'changelog',
-    describe: 'CHANGELOG file',
+    describe: 'CHANGELOG.md file',
     requiresArg: true,
     type: 'string',
     demand: true
@@ -48,7 +48,10 @@ const yargs = require('yargs')
 
   // Help
   .help('h')
-  .alias('h', 'help');
+  .alias('h', 'help')
+  .usage('Usage: $0 -u user.yml -a app.yml -l CHANGELOG.md')
+  .example('$0 -u user.yml -a memento.yml -l CHANGELOG.md')
+  .example('$0 -u user.yml -a rdp.yml -l CHANGELOG.md');
 
 const argv = yargs.argv;
 let userConfig;
