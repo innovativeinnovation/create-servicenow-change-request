@@ -1,6 +1,6 @@
 {
   "name": "create-servicenow-change-request",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Automate the creation of a change request in ServiceNow",
   "keywords": [
     "change",
