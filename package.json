@@ -36,6 +36,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "cryptr": "^6.0.1",
+    "inquirer-confirm": "^2.0.7",
     "js-yaml": "^3.13.1",
     "log-symbols": "^3.0.0",
     "moment": "^2.24.0",

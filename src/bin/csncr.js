@@ -12,6 +12,7 @@ const moment = require('moment');
 const logSymbols = require('log-symbols');
 const colors = require('colors');
 const Cryptr = require('cryptr');
+const confirm = require('inquirer-confirm');
 
 const utils = require('../lib/index.js');
 const yargs = require('yargs')
@@ -82,7 +83,23 @@ if (argv.u && argv.a && argv.l) {
   const cptr = new Cryptr(userConfig.key);
   userConfig.password = cptr.decrypt(userConfig.token);
 
-  createChangeRequest(userConfig, appConfig, startDate, endDate, changelogInfo);
+  console.log('\nVersion: ' + changelogInfo[0]);
+  console.log('List of changes: \n' + changelogInfo[1] + '\n');
+
+  confirm({
+    question: 'Is the version and description correct?',
+    default: false
+  }).then(function () {
+    createChangeRequest(
+      userConfig,
+      appConfig,
+      startDate,
+      endDate,
+      changelogInfo
+    );
+  }, function () {
+    process.exit(0);
+  });
 } else {
   yargs.showHelp();
   process.exit(0);
