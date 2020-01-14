@@ -24,14 +24,14 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^6.6.0",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1"
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0"
   },
   "dependencies": {
     "colors": "^1.4.0",
@@ -42,6 +42,6 @@
     "moment": "^2.24.0",
     "node-alias": "^1.0.4",
     "puppeteer": "^2.0.0",
-    "yargs": "^14.2.0"
+    "yargs": "^15.1.0"
   }
 }
