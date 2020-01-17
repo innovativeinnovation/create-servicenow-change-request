@@ -1,6 +1,10 @@
 Changelog
 =========
 
+### v0.1.1 / 2020-01-17
+
+  - Update dependencies
+
 ### v0.1.0 / 2019-11-19
 
   - Add confirmation of version before creating change request.
