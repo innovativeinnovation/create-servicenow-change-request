@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/innovativeinnovation/create-servicenow-change-request">
-    <img alt="Travis Status" src="https://travis-ci.org/innovativeinnovation/create-servicenow-change-request.svg?branch=master">
+  <a href="https://github.com/innovativeinnovation/create-servicenow-change-request/actions">
+    <img alt="Build Status" src="https://github.com/innovativeinnovation/create-servicenow-change-request/workflows/Build/badge.svg?branch=master">
   </a>
   <a href="https://coveralls.io/github/innovativeinnovation/create-servicenow-change-request?branch=master">
     <img alt="Coverage Status" src="https://coveralls.io/repos/github/innovativeinnovation/create-servicenow-change-request/badge.svg?branch=master"/>
