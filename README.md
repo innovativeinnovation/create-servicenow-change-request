@@ -13,9 +13,6 @@
   <a href="https://coveralls.io/github/innovativeinnovation/create-servicenow-change-request?branch=master">
     <img alt="Coverage Status" src="https://coveralls.io/repos/github/innovativeinnovation/create-servicenow-change-request/badge.svg?branch=master"/>
   </a>
-  <a href="https://david-dm.org/innovativeinnovation/create-servicenow-change-request">
-    <img alt="Dependencies Status" src="https://david-dm.org/innovativeinnovation/create-servicenow-change-request/status.svg"/>
-  </a>
   <a href="https://raw.githubusercontent.com/innovativeinnovation/create-servicenow-change-request/master/LICENSE">
     <img alt="Apache License 2.0" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg">
   </a>
