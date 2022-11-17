@@ -106,7 +106,7 @@ if (argv.u && argv.a && argv.l) {
 }
 
 async function connectToTequila (page, userConfig) {
-  await page.goto('https://tequila.epfl.ch/cgi-bin/tequila/loginform');
+  await page.goto(userConfig.host + '/login');
 
   await page.waitForSelector('#username');
   await page.evaluate(
@@ -118,15 +118,12 @@ async function connectToTequila (page, userConfig) {
   );
 
   await page.click('#loginbutton');
+  await page.waitForSelector('#gsft_main');
 };
 
 async function createChange (
   page, userConfig, appConfig, startDate, endDate, changelogInfo
 ) {
-  await page.goto(userConfig.host + '/change_request.do?' +
-    'sys_id=-1&sysparm_stack=change_request_list.do&' +
-    'sysparm_query=type=Standard^EQ&active=true');
-  await page.waitForTimeout(5000);
   await page.goto(userConfig.host + '/change_request.do?' +
     'sys_id=-1&sysparm_stack=change_request_list.do&' +
     'sysparm_query=type=Standard^EQ&active=true');
@@ -139,10 +136,10 @@ async function createChange (
         'change_request.u_identity_of_item_s__to_be_ch'
       ).value = 'Software';
       document.getElementById(
-        'sys_display.change_request.u_business_service'
+        'sys_display.change_request.business_service'
       ).value = appConfig.name;
       document.getElementById(
-        'change_request.u_business_service'
+        'change_request.business_service'
       ).value = appConfig.id;
 
       document.getElementById(
@@ -198,6 +195,7 @@ async function createChange (
     '\n'
   );
   await page.click('#sysverb_insert');
+  await page.waitForSelector('#change_request_list');
   return changeNum;
 };
 
@@ -213,7 +211,7 @@ async function closeTask (
   } else {
     throw new Error('Link not found');
   }
-  await page.waitForTimeout(3000);
+  await page.waitForSelector('#tabs2_section');
   await page.evaluate(
     (startDate, endDate) => {
       document.getElementById('change_task.change_request.work_start').value =
@@ -229,6 +227,7 @@ async function closeTask (
     endDate
   );
   await page.click('#close_complete');
+  await page.waitForSelector('#related_lists_wrapper');
 };
 
 async function createChangeRequest (
@@ -244,7 +243,6 @@ async function createChangeRequest (
     page, userConfig, appConfig, startDate, endDate, changelogInfo
   );
 
-  await page.waitForTimeout(2000);
   const linkHandlers = await page.$x(
     '//a[contains(text(), \'' + changeNum + '\')]'
   );
@@ -254,7 +252,7 @@ async function createChangeRequest (
     throw new Error('Link not found');
   }
 
-  await page.waitForTimeout(3000);
+  await page.waitForSelector('#related_lists_wrapper');
   await closeTask(
     page, userConfig, appConfig, startDate, endDate, changelogInfo
   );
