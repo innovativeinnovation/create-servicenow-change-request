@@ -126,7 +126,7 @@ async function createChange (
   await page.goto(userConfig.host + '/change_request.do?' +
     'sys_id=-1&sysparm_stack=change_request_list.do&' +
     'sysparm_query=type=Standard^EQ&active=true');
-  await page.waitFor(5000);
+  await page.waitForTimeout(5000);
   await page.goto(userConfig.host + '/change_request.do?' +
     'sys_id=-1&sysparm_stack=change_request_list.do&' +
     'sysparm_query=type=Standard^EQ&active=true');
@@ -213,7 +213,7 @@ async function closeTask (
   } else {
     throw new Error('Link not found');
   }
-  await page.waitFor(3000);
+  await page.waitForTimeout(3000);
   await page.evaluate(
     (startDate, endDate) => {
       document.getElementById('change_task.change_request.work_start').value =
@@ -244,7 +244,7 @@ async function createChangeRequest (
     page, userConfig, appConfig, startDate, endDate, changelogInfo
   );
 
-  await page.waitFor(2000);
+  await page.waitForTimeout(2000);
   const linkHandlers = await page.$x(
     '//a[contains(text(), \'' + changeNum + '\')]'
   );
@@ -254,7 +254,7 @@ async function createChangeRequest (
     throw new Error('Link not found');
   }
 
-  await page.waitFor(3000);
+  await page.waitForTimeout(3000);
   await closeTask(
     page, userConfig, appConfig, startDate, endDate, changelogInfo
   );
