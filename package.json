@@ -11,7 +11,7 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/innovativeinnovation/create-servicenow-change-request.git",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "bin": {
     "create-servicenow-change-request": "src/bin/create-servicenow-change-request.js",
@@ -42,7 +42,7 @@
     "log-symbols": "^4.0.0",
     "moment": "^2.26.0",
     "node-alias": "^1.0.4",
-    "puppeteer": "^3.3.0",
+    "puppeteer": "^19.2.2",
     "yargs": "^15.3.1"
   }
 }
