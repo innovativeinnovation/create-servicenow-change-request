@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/innovativeinnovation/create-servicenow-change-request/actions">
-    <img alt="Build Status" src="https://github.com/innovativeinnovation/create-servicenow-change-request/workflows/Build/badge.svg?branch=master">
+    <img alt="Build Status" src="https://github.com/innovativeinnovation/create-servicenow-change-request/actions/workflows/build.yml/badge.svg?branch=master">
   </a>
   <a href="https://coveralls.io/github/innovativeinnovation/create-servicenow-change-request?branch=master">
     <img alt="Coverage Status" src="https://coveralls.io/repos/github/innovativeinnovation/create-servicenow-change-request/badge.svg?branch=master"/>
