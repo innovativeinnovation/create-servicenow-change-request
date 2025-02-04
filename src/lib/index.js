@@ -3,6 +3,7 @@
  * See the LICENSE file for more details.
  */
 
+const querystring = require('querystring');
 const yaml = require('js-yaml');
 const fs = require('fs');
 
@@ -51,5 +52,34 @@ const getChangelogInfo = (file) => {
   }
 };
 
+const createChangeRequest = (appConfig, startDate, endDate, changelogInfo) => {
+  const base = '/change_request.do';
+  const params = {
+    sys_id: -1,
+    sysparm_stack: 'change_request_list.do'
+  };
+  const change = {
+    u_identity_of_item_s__to_be_ch: 'Software',
+    reason: appConfig.prefix + ' - ' + changelogInfo[0],
+    assignment_group: 'javascript:var ag=new GlideRecord("sys_user_group");' +
+      'ag.addQuery("name", "' + appConfig.group_name + '");ag.query();' +
+      'if(ag.next()){ag.sys_id}',
+    business_service: 'javascript:var bs=new GlideRecord("cmdb_ci_service");' +
+      'bs.addQuery("name", "' + appConfig.name + '");bs.query();if(bs.next())' +
+      '{bs.getValue("sys_id")}',
+    impact: changelogInfo[2],
+    short_description: appConfig.prefix + ' - ' + changelogInfo[0],
+    description: changelogInfo[1],
+    assigned_to: 'javascript:gs.getUserID()',
+    start_date: startDate,
+    end_date: endDate
+  };
+  let changeParams = querystring.stringify(change);
+  changeParams = changeParams.replaceAll('&', '%5E');
+  return base + '?' + querystring.stringify(params) + '&sysparm_query=' +
+    changeParams;
+};
+
 exports.getConfig = getConfig;
 exports.getChangelogInfo = getChangelogInfo;
+exports.createChangeRequest = createChangeRequest;

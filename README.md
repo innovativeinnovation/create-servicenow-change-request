@@ -23,16 +23,14 @@
 
 ---
 
-Overview
---------
+## Overview
 
 This tool automate the creation of a change request in ServiceNow.
 
 * The planned and work start date is set to current date.
 * The planned and work end date is set to current date plus 5 minutes.
 
-Install
--------
+## Install
 
 Install this globally and you'll have access to the
 `create-servicenow-change-request` command anywhere on your system.
@@ -41,52 +39,31 @@ Install this globally and you'll have access to the
 npm i create-servicenow-change-request -g
 ```
 
-Configuration
--------------
-
-### User configuration file
+## Configuration
 
 Create a yaml file with following informations:
 
 ```yaml
-# ServiceNow host
-host:
+# ServiceNow url
+url:
 
-# ServiceNow id and name
-id:
+# Business Service name
 name:
 
-# Tequila
-username:
-token:
-key:
-```
-
-### Application configuration file
-
-Create a yaml file with following informations:
-
-```yaml
-# Business Service id and name
-id:
-name:
-
-# Assignment group id and name
-group_id:
+# Assignment group name
 group_name:
 
 # Version prefix
 prefix:
 ```
 
-### Usage
+## Usage
 
 ```console
 csncr -h
 Usage: csncr -u user.yml -a app.yml -l CHANGELOG.md
 
 Options:
-  -u, --user-config  User configuration file               [string] [required]
   -a, --app-config   Application configuration file        [string] [required]
   -l, --changelog    CHANGELOG.md file                     [string] [required]
   -h, --help         Show help                                       [boolean]
@@ -97,20 +74,17 @@ Examples:
   csncr -u user.yml -a rdp.yml -l CHANGELOG.md
 ```
 
-Contributing
-------------
+## Contributing
 
 Contributions are always welcome.
 
 See [Contributing](CONTRIBUTING.md).
 
-Developer
----------
+## Developer
 
-  * [William Belle](https://github.com/williambelle)
+- [William Belle](https://github.com/williambelle)
 
-License
--------
+## License
 
 Apache License 2.0
 
