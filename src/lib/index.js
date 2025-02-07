@@ -3,15 +3,13 @@
  * See the LICENSE file for more details.
  */
 
-const querystring = require('querystring');
-const yaml = require('js-yaml');
-const fs = require('fs');
+import yaml from 'js-yaml';
+import { stringify } from 'querystring';
+import { readFileSync } from 'fs';
 
 const getConfig = (file) => {
   try {
-    var data = yaml.safeLoad(
-      fs.readFileSync(file, 'utf8')
-    );
+    var data = yaml.safeLoad(readFileSync(file, 'utf8'));
     return data;
   } catch (e) {
     throw new Error(e.message);
@@ -20,7 +18,7 @@ const getConfig = (file) => {
 
 const getChangelogInfo = (file) => {
   try {
-    const changelog = fs.readFileSync(file, 'utf8');
+    const changelog = readFileSync(file, 'utf8');
     const lines = changelog.split(/\r?\n/);
     let versionFound = false;
     let description = '';
@@ -74,12 +72,14 @@ const createChangeRequest = (appConfig, startDate, endDate, changelogInfo) => {
     start_date: startDate,
     end_date: endDate
   };
-  let changeParams = querystring.stringify(change);
+  let changeParams = stringify(change);
   changeParams = changeParams.replaceAll('&', '%5E');
-  return base + '?' + querystring.stringify(params) + '&sysparm_query=' +
+  return base + '?' + stringify(params) + '&sysparm_query=' +
     changeParams;
 };
 
-exports.getConfig = getConfig;
-exports.getChangelogInfo = getChangelogInfo;
-exports.createChangeRequest = createChangeRequest;
+export {
+  getConfig,
+  getChangelogInfo,
+  createChangeRequest
+};

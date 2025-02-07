@@ -5,14 +5,20 @@
  * See the LICENSE file for more details.
  */
 
-'use strict';
+import open from 'open';
+import yargs from 'yargs';
+import moment from 'moment';
+import confirm from 'inquirer-confirm';
+import { hideBin } from 'yargs/helpers';
 
-const moment = require('moment');
-const confirm = require('inquirer-confirm');
-const open = require('open');
+import {
+  getConfig,
+  getChangelogInfo,
+  createChangeRequest
+} from '../lib/index.js';
 
-const utils = require('../lib/index.js');
-const yargs = require('yargs')
+const yargsInstance = yargs(hideBin(process.argv));
+yargsInstance
 
   // Application config
   .option('a', {
@@ -42,7 +48,7 @@ const yargs = require('yargs')
   .example('$0 -a memento.yml -l CHANGELOG.md')
   .example('$0 -a rdp.yml -l CHANGELOG.md');
 
-const argv = yargs.argv;
+const argv = yargsInstance.parse();
 let appConfig;
 let changelogInfo;
 const startDate = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -52,12 +58,12 @@ const endDate = moment(startDate).add(5, 'minutes').format(
 
 if (argv.a && argv.l) {
   try {
-    appConfig = utils.getConfig(argv.a);
+    appConfig = getConfig(argv.a);
   } catch (e) {
     console.log(e.message);
   }
   try {
-    changelogInfo = utils.getChangelogInfo(argv.l);
+    changelogInfo = getChangelogInfo(argv.l);
   } catch (e) {
     console.log(e.message);
   }
@@ -69,7 +75,7 @@ if (argv.a && argv.l) {
     question: 'Is the version and description correct?',
     default: false
   }).then(async function () {
-    const path = utils.createChangeRequest(
+    const path = createChangeRequest(
       appConfig,
       startDate,
       endDate,
@@ -80,6 +86,6 @@ if (argv.a && argv.l) {
     process.exit(0);
   });
 } else {
-  yargs.showHelp();
+  yargsInstance.showHelp();
   process.exit(0);
 }
