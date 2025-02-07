@@ -70,8 +70,8 @@ Options:
   -v, --version      Show version number                             [boolean]
 
 Examples:
-  csncr -u user.yml -a memento.yml -l CHANGELOG.md
-  csncr -u user.yml -a rdp.yml -l CHANGELOG.md
+  csncr -a memento.yml -l CHANGELOG.md
+  csncr -a rdp.yml -l CHANGELOG.md
 ```
 
 ## Contributing
