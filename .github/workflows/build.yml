@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [ '18' ]
+        node: [ '18', '19' ]
 
     steps:
       - name: Clone repository
@@ -45,4 +45,4 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           parallel-finished: true
-          carryforward: "node-18"
+          carryforward: "node-18,node-19"
