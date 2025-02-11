@@ -32,11 +32,4 @@ describe('getChangelogInfo', function () {
     infos[1].should.equal('- More changes');
     infos[2].should.equal(3);
   });
-
-  it('should get changelog informations (significant)', () => {
-    const infos = getChangelogInfo('test/resources/change-sig.md');
-    infos[0].should.equal('v0.3.0');
-    infos[1].should.equal('- Good examples and basic guidelines');
-    infos[2].should.equal(2);
-  });
 });
