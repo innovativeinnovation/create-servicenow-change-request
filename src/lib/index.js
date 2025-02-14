@@ -9,7 +9,7 @@ import { readFileSync } from 'fs';
 
 const getConfig = (file) => {
   try {
-    var data = yaml.load(readFileSync(file, 'utf8'));
+    const data = yaml.load(readFileSync(file, 'utf8'));
     return data;
   } catch (e) {
     throw new Error(e.message);
